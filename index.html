@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="saida"></h1>
+    <script>
+        saida.innerText = Date()
+
+        // Verifica se o navegador suporta a API NetworkInformation
+        if ('connection' in navigator) {
+        var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+
+        // Função para lidar com as informações de rede
+        function handleNetworkChange(event) {
+            console.log("Tipo de conexão:", connection.effectiveType);
+            console.log("Velocidade de conexão:", connection.downlink + " Mbps");
+        }
+
+        // Adiciona um ouvinte de evento para detectar mudanças na conexão de rede
+        connection.addEventListener('change', handleNetworkChange);
+
+        // Obter as informações da conexão de rede
+        handleNetworkChange();
+        } else {
+            console.log("A API NetworkInformation não é suportada neste navegador.");
+        }
+
+    </script>
+</body>
+</html>

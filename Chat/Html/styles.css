@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #ece5dd;
+  }
+  
+  .whatsapp-web {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .sidebar {
+    width: 15%;
+    background-color: #f0f0f0;
+    border-right: 1px solid #ccc;
+  }
+  
+  .sidebar header {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #ededed;
+  }
+  
+  .sidebar header img.user-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .sidebar input {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  
+  .chats-list {
+    overflow-y: auto;
+    height: calc(100% - 60px);
+  }
+  
+  .chat {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .chat img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .chat-info h4 {
+    margin-bottom: 4px;
+  }
+  
+  .chat-time {
+    margin-left: auto;
+    color: #888;
+    font-size: 0.8rem;
+  }
+  
+  .chat-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chat-area header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #ededed;
+  }
+  
+  .chat-area header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .messages {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto;
+  }
+  
+  .message {
+    max-width: 60%;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 8px;
+    color: #fff;
+  }
+  
+  .message.received {
+    background-color: #dcf8c6;
+    color: #000;
+    align-self: flex-start;
+  }
+  
+  .message.sent {
+    background-color: #34b7f1;
+    align-self: flex-end;
+  }
+  
+  .chat-area footer {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+  }
+  
+  .chat-area footer input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .chat-area footer button {
+    margin-left: 10px;
+    padding: 10px;
+    background-color: #34b7f1;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .hidden {
+    display: none;
+  }

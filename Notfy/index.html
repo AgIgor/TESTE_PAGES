@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificação com JavaScript</title>
+</head>
+<body>
+    <h1>Exemplo de Notificação</h1>
+    <button id="notify-btn">Gerar Notificação</button>
+
+    <script>
+        // Verifica suporte a notificações
+        if ('Notification' in window) {
+            document.getElementById('notify-btn').addEventListener('click', () => {
+                // Verifica o estado da permissão
+                if (Notification.permission === 'granted') {
+                    // Exibe a notificação
+                    gerarNotificacao();
+                } else if (Notification.permission === 'default') {
+                    // Solicita permissão ao usuário
+                    Notification.requestPermission().then(permission => {
+                        if (permission === 'granted') {
+                            gerarNotificacao();
+                        } else {
+                            alert('Você negou a permissão para notificações.');
+                        }
+                    });
+                } else {
+                    alert('Notificações foram bloqueadas pelo usuário.');
+                }
+            });
+        } else {
+            alert('Notificações não são suportadas neste navegador.');
+        }
+
+        // Função para gerar a notificação
+        function gerarNotificacao() {
+            const options = {
+                body: 'Esta é uma notificação simples de exemplo!',
+                icon: 'https://via.placeholder.com/100', // URL para um ícone opcional
+                vibrate: [200, 100, 200] // Vibração para dispositivos móveis
+            };
+            new Notification('Olá!', options);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhatsApp Web Clone</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="whatsapp-web">
+
+    <!-- Sidebar para lista de conversas -->
+
+    <div class="sidebar">
+
+      <header>
+
+        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Usuário" class="user-icon">
+        <input type="text" placeholder="Buscar ou começar uma nova conversa">
+
+      </header>
+
+      <div class="chats-list">
+
+        <!-- Exemplo de conversa -->
+
+        <div class="chat">
+          <img id="foto1" src="https://www.w3schools.com/howto/img_avatar.png" alt="Contato">
+          <div class="chat-info">
+            <h4>Contato1</h4>
+            <p>Última mensagem...</p>
+          </div>
+          <span class="chat-time">15:30</span>
+        </div>
+
+        <div class="chat">
+          <img id="foto1" src="https://www.w3schools.com/howto/img_avatar.png" alt="Contato">
+          <div class="chat-info">
+            <h4>Contato2</h4>
+            <p>Última mensagem...</p>
+          </div>
+          <span class="chat-time">15:30</span>
+        </div>
+
+        <div class="chat">
+          <img id="foto1" src="https://www.w3schools.com/howto/img_avatar.png" alt="Contato">
+          <div class="chat-info">
+            <h4>Contato3</h4>
+            <p>Última mensagem...</p>
+          </div>
+          <span class="chat-time">15:30</span>
+        </div>
+
+        <div class="chat">
+          <img id="foto1" src="https://www.w3schools.com/howto/img_avatar.png" alt="Contato">
+          <div class="chat-info">
+            <h4>Contato4</h4>
+            <p>Última mensagem...</p>
+          </div>
+          <span class="chat-time">15:30</span>
+        </div>
+
+        <div class="chat">
+          <img id="foto1" src="https://www.w3schools.com/howto/img_avatar.png" alt="Contato">
+          <div class="chat-info">
+            <h4>Contato5</h4>
+            <p>Última mensagem...</p>
+          </div>
+          <span class="chat-time">15:30</span>
+        </div>
+        
+        <!-- Mais chats aqui -->
+      
+      </div>
+    </div>
+    
+    <!-- Área de conversas -->
+
+    <div class="chat-area hidden">
+
+      <header>
+        <img id="foto2" src="https://www.w3schools.com/howto/img_avatar.png" alt="Contato">
+        <h3>Contato Selecionado</h3>
+      </header>
+
+      <div class="messages">
+        <!-- Exemplo de mensagem recebida -->
+        <div class="message received">Oi, tudo bem?</div>
+        <!-- Exemplo de mensagem enviada -->
+        <div class="message sent">Tudo, e você?</div>
+      </div>
+
+      <footer>
+        <input type="text" placeholder="Digite uma mensagem">
+        <button>Enviar</button>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

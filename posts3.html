@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram Post Cards</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .card {
+        width: 300px;
+        margin: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .card img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+
+<input type="text" id="searchInput" placeholder="Digite um tema">
+<button onclick="searchImages()">Buscar Imagens</button>
+
+<div id="cardsContainer"></div>
+
+<script>
+    function searchImages() {
+        const apiKey = 'mdIUNnkn7szplvYi6k0lPrKmWw0y8buHKH5gnnIeRk3NP6orQDYfAAkO'; // Substitua pelo seu próprio token de API do Pexels
+        const searchQuery = document.getElementById('searchInput').value;
+        const url = `https://api.pexels.com/v1/search?query=${searchQuery}&per_page=6`;
+
+        fetch(url, {
+            headers: {
+                Authorization: apiKey
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const cardsContainer = document.getElementById('cardsContainer');
+            cardsContainer.innerHTML = '';
+
+            data.photos.forEach(photo => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+
+                const image = document.createElement('img');
+                image.src = photo.src.large;
+                card.appendChild(image);
+
+                const downloadBtn = document.createElement('a');
+                downloadBtn.href = photo.src.original;
+                downloadBtn.download = 'image.jpg';
+                downloadBtn.textContent = 'Download';
+                card.appendChild(downloadBtn);
+
+                cardsContainer.appendChild(card);
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao buscar imagens:', error);
+        });
+    }
+</script>
+
+</body>
+</html>

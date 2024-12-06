@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Posts para Instagram</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        #post-container {
+            max-width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #post-image {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gerador de Posts para Instagram</h1>
+    <input type="text" id="searchInput" placeholder="Digite um tema...">
+    <button onclick="searchImages()">Buscar Imagens</button>
+    <div id="imageContainer"></div>
+
+    <script>
+        function searchImages() {
+            var apiKey = 'mdIUNnkn7szplvYi6k0lPrKmWw0y8buHKH5gnnIeRk3NP6orQDYfAAkO'; // Insira sua API Key do Pexels aqui
+            var query = document.getElementById('searchInput').value;
+            var url = 'https://api.pexels.com/v1/search?query=' + query + '&orientation=portrait&per_page=5';
+            
+            $.ajax({
+                url: url,
+                headers: {
+                    'Authorization': apiKey
+                },
+                success: function(result) {
+                    displayImages(result.photos);
+                }
+            });
+        }
+
+        function displayImages(photos) {
+            var container = document.getElementById('imageContainer');
+            container.innerHTML = '';
+
+            photos.forEach(function(photo) {
+                var imageUrl = photo.src.large2x;
+                var imageElement = document.createElement('img');
+                imageElement.src = imageUrl;
+                imageElement.style.width = '100%';
+                imageElement.style.height = 'auto';
+                container.appendChild(imageElement);
+
+                var downloadLink = document.createElement('a');
+                downloadLink.href = imageUrl;
+                downloadLink.download = 'post_instagram.jpg';
+                downloadLink.textContent = 'Download Imagem';
+                container.appendChild(downloadLink);
+
+                var lineBreak = document.createElement('br');
+                container.appendChild(lineBreak);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obter Coordenadas</title>
+</head>
+<body>
+    <h1>Obter Coordenadas do Cliente</h1>
+    <button id="get-coordinates">Obter Coordenadas</button>
+    <p id="output"></p>
+
+    <script>
+
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                console.log('Coordenadas:', position.coords.latitude, position.coords.longitude);
+            },
+            error => {
+                if (error.code === error.PERMISSION_DENIED) {
+                    console.error('Usuário negou a permissão para geolocalização.');
+                }
+            }
+        );
+
+
+        document.getElementById("get-coordinates").addEventListener("click", function() {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        document.getElementById("output").textContent = 
+                            `Latitude: ${latitude}, Longitude: ${longitude}`;
+                    },
+                    function(error) {
+                        switch(error.code) {
+                            case error.PERMISSION_DENIED:
+                                alert("Usuário negou a solicitação de geolocalização.");
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                alert("Informações de localização indisponíveis.");
+                                break;
+                            case error.TIMEOUT:
+                                alert("A solicitação para obter a localização expirou.");
+                                break;
+                            default:
+                                alert("Ocorreu um erro desconhecido.");
+                        }
+                    }
+                );
+            } else {
+                alert("Geolocalização não é suportada neste navegador.");
+            }
+        });
+
+    
+        // Verifica o estado da permissão para geolocalização
+        navigator.permissions.query({ name: 'geolocation' })
+        .then(permissionStatus => {
+            console.log('Estado da permissão:', permissionStatus.state); // "granted", "denied", "prompt"
+
+            if (permissionStatus.state === 'granted') {
+                console.log('Permissão concedida!');
+            } else if (permissionStatus.state === 'prompt') {
+                console.log('Permissão ainda não foi solicitada.');
+            } else if (permissionStatus.state === 'denied') {
+                console.log('Permissão foi negada.');
+            }
+
+            // Monitora mudanças no estado da permissão
+            permissionStatus.onchange = () => {
+                console.log('Novo estado da permissão:', permissionStatus.state);
+            };
+        })
+        .catch(error => {
+            console.error('Erro ao verificar a permissão:', error);
+        });
+
+        // Verifica se o navegador suporta notificações
+        if ('Notification' in window) {
+            // Verifica o estado da permissão
+            if (Notification.permission === 'granted') {
+                new Notification('Notificação já autorizada!');
+            } else if (Notification.permission === 'default') {
+                // Solicita permissão
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        new Notification('Permissão concedida! Agora você pode receber notificações.');
+                    } else {
+                        console.error('Permissão negada para notificações.');
+                    }
+                });
+            } else {
+                console.error('Permissão negada anteriormente.');
+            }
+        } else {
+            console.error('Notificações não são suportadas neste navegador.');
+        }
+
+
+
+    </script>
+</body>
+</html>

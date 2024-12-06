@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador de Posts para Instagram</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+    }
+    #post-container {
+        max-width: 300px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    #post-image {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+<div id="post-container">
+    <input type="text" id="theme-input" placeholder="Digite o tema">
+    <button onclick="generatePost()">Gerar Post</button>
+    <button id="download-btn" style="display: none;" onclick="downloadImage()">Download</button>
+    <img id="post-image" src="" alt="Imagem do Post">
+</div>
+
+<script>
+    function generatePost() {
+        const theme = document.getElementById('theme-input').value;
+        const apiKey = 'mdIUNnkn7szplvYi6k0lPrKmWw0y8buHKH5gnnIeRk3NP6orQDYfAAkO';
+        const url = 'https://api.pexels.com/v1/search?query=' + theme + '&orientation=portrait&per_page=5';
+
+        fetch(url, {
+            headers: {
+                Authorization: 'Bearer ' + apiKey
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const imageUrl = data.photos[0].src.portrait;
+            console.log(data);
+            document.getElementById('post-image').src = imageUrl;
+            document.getElementById('download-btn').style.display = 'block';
+        })
+        .catch(error => console.log('Erro ao obter imagem:', error));
+    }
+
+    function downloadImage() {
+        const imageUrl = document.getElementById('post-image').src;
+        const filename = 'instagram_post.jpg';
+
+        fetch(imageUrl)
+        .then(response => response.blob())
+        .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(error => console.log('Erro ao fazer o download da imagem:', error));
+    }
+</script>
+</body>
+</html>

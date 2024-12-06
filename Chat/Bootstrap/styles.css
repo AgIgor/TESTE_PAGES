@@ -1,0 +1,21 @@
+/* Ajuste de estilos das mensagens */
+.message {
+    max-width: 60%;
+  }
+  
+  .message.received {
+    align-self: flex-start;
+    background-color: #f0f0f0;
+  }
+  
+  .message.sent {
+    align-self: flex-end;
+    background-color: #34b7f1;
+    color: #fff;
+  }
+  
+  /* Barra lateral */
+  .chats-list {
+    overflow-y: auto;
+  }
+  
