@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lâmpada Animada</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #222;
+            overflow: hidden;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #eee;
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .lamp-holder {
+            width: 30px;
+            height: 50px;
+            background-color: #555;
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .lamp-holder::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 20px;
+            background-color: #777;
+            border-radius: 5px;
+        }
+
+        .bulb {
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .bulb.on {
+            background-color: #fffacd; /* light goldenrod yellow */
+            box-shadow: 0 0 50px #fffacd, 0 0 100px #fffacd, 0 0 150px #fffacd;
+        }
+
+        .bulb.flicker.on {
+            animation: flicker 0.5s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+
+        .cord {
+            width: 2px;
+            height: 100px;
+            background-color: #777;
+            position: absolute;
+            top: -100px; /* Ajuste para onde o cordão começa */
+            z-index: 0;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 1.1em;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Minha Lâmpada Animada</h1>
+
+    <div class="container">
+        <div class="cord"></div>
+        <div class="lamp-holder"></div>
+        <div class="bulb" id="lampBulb"></div>
+    </div>
+
+    <button class="button" id="toggleButton">Ligar / Desligar Lâmpada</button>
+
+    <script>
+        const lampBulb = document.getElementById('lampBulb');
+        const toggleButton = document.getElementById('toggleButton');
+
+        let isOn = false;
+
+        function toggleLamp() {
+            isOn = !isOn;
+            if (isOn) {
+                lampBulb.classList.add('on');
+                // Adiciona um pequeno delay para a animação de piscar para que não comece imediatamente
+                setTimeout(() => {
+                    lampBulb.classList.add('flicker');
+                }, 100);
+            } else {
+                lampBulb.classList.remove('on', 'flicker');
+            }
+        }
+
+        toggleButton.addEventListener('click', toggleLamp);
+        lampBulb.addEventListener('click', toggleLamp); // Clicar na lâmpada também liga/desliga
+    </script>
+</body>
+</html>
