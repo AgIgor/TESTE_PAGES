@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Curso de HTML + Tailwind</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- CSS extra -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('img/background.jpg');">
+
+  <div class="bg-black bg-opacity-70 p-8 rounded-xl w-full max-w-md text-white">
+    <h1 class="text-2xl font-bold mb-2 text-center">
+      Curso de HTML + Tailwind
+    </h1>
+
+    <p class="text-center mb-6">
+      Do zero a um site pronto
+    </p>
+
+    <form action="save.php" method="POST" class="space-y-4">
+      <input 
+        type="text" 
+        name="nome" 
+        placeholder="Nome"
+        required
+        class="w-full p-3 rounded text-black">
+
+      <input 
+        type="email" 
+        name="email" 
+        placeholder="Email"
+        required
+        class="w-full p-3 rounded text-black">
+
+      <input 
+        type="tel" 
+        name="telefone" 
+        placeholder="Telefone"
+        required
+        class="w-full p-3 rounded text-black">
+
+      <button 
+        type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 p-3 rounded font-bold">
+        Quero me inscrever
+      </button>
+    </form>
+  </div>
+
+</body>
+</html>
